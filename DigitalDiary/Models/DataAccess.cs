@@ -9,36 +9,40 @@ namespace DigitalDiary.Models
 {
     public class DataAccess : IDisposable
     {
-        SqlConnection connection;
-        SqlCommand command;
-
+        SqlConnection conn;
+        SqlCommand comm;
         public DataAccess()
         {
-            this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PDB"].ConnectionString);
-            this.connection.Open();
+            this.conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DigitalDiary"].ConnectionString);
+            this.conn.Open();
         }
+
 
 
         public SqlDataReader GetData(string sql)
         {
-            this.command = new SqlCommand(sql, connection);
-            return this.command.ExecuteReader();
+            this.comm = new SqlCommand(sql,conn);
+            return this.comm.ExecuteReader();
         }
         public SqlDataReader GetData(string sql, int id)
         {
-            this.command = new SqlCommand(sql, connection);
-            this.command.Parameters.AddWithValue("userId", id);
-            return this.command.ExecuteReader();
+            this.comm = new SqlCommand(sql, conn);
+            this.comm.Parameters.AddWithValue("Uid",id);
+            return this.comm.ExecuteReader();
         }
         public int ExecuteQuery(string sql)
         {
-            this.command = new SqlCommand(sql, connection);
-            return this.command.ExecuteNonQuery();
+            this.comm = new SqlCommand(sql, conn);
+            return this.comm.ExecuteNonQuery();
         }
+
+
+
+
 
         public void Dispose()
         {
-            this.connection.Close();
+            this.conn.Close();
         }
     }
 }
