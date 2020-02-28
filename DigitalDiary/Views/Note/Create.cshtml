@@ -1,0 +1,84 @@
+﻿@model DigitalDiary.Models.Note
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>Note</legend>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.contentNumber)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.contentNumber)
+                @Html.ValidationMessageFor(model => model.contentNumber)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.userId)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.userId)
+                @Html.ValidationMessageFor(model => model.userId)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.contentText)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.contentText)
+                @Html.ValidationMessageFor(model => model.contentText)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.contentLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.contentLink)
+                @Html.ValidationMessageFor(model => model.contentLink)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.contentPriority)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.contentPriority)
+                @Html.ValidationMessageFor(model => model.contentPriority)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.contentDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.contentDate)
+                @Html.ValidationMessageFor(model => model.contentDate)
+            </div>
+    
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

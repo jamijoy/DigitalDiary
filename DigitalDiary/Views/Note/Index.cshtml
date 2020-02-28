@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DigitalDiary.Models.Note>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Note Files</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New Note", "Create")
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.contentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contentLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contentPriority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contentDate)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.contentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contentText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contentLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contentPriority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contentDate)
+            </td>
+            <td>
+                @*Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
