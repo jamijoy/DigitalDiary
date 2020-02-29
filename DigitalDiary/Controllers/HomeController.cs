@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigitalDiary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,11 @@ namespace DigitalDiary.Controllers
 {
     public class HomeController : Controller
     {
+        ContentRepository noteRepo = new ContentRepository();
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(noteRepo.GetAll(id));
         }
     }
 }

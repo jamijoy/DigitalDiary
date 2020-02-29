@@ -7,5 +7,12 @@ namespace DigitalDiary.Models
 {
     public class Content
     {
+        public int Nid { get; set; }
+        public int Uid { get; set; }
+        public string Nname { get; set; }
+        public string Ntext { get; set; }
+        public string Nimage { get; set; }
+        public string Ndate { get; set; }
+        public int Npriority { get; set; }
     }
 }
