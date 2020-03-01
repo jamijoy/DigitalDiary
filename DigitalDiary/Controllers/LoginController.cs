@@ -16,14 +16,14 @@ namespace DigitalDiary.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(FormCollection fc)
+        [HttpPost,ActionName("validate")]
+        public ActionResult check(FormCollection fc)
         {
             int counting = userRepo.IsValidate(fc["Uname"].ToString(), fc["Upassword"].ToString());
 
             if (counting == 1)
             {
-                User us = userRepo.GetDetailsByName("jami");
+                User us = userRepo.GetDetailsByName(fc["Uname"].ToString());
                 Session["uid"] = us.Uid;
                 Session["uname"] = us.Uname;
                 return RedirectToAction("Index", "Home", new { id=us.Uid });
@@ -34,6 +34,12 @@ namespace DigitalDiary.Controllers
                 return RedirectToAction("Index");
             }
 
+        }
+        [HttpPost, ActionName("register")]
+        public ActionResult insertData(FormCollection fc)
+        {
+            userRepo.Insert(fc["RegName"].ToString(), fc["RegPassword"].ToString());
+            return RedirectToAction("Index");
         }
     }
 }

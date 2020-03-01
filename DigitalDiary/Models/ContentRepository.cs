@@ -37,7 +37,7 @@ namespace DigitalDiary.Models
 
         public Content Get(int id)
         {
-            string sql = "select * form DiaryContents where Uid=@Uid";
+            string sql = "select * from DiaryContents where Nid="+id;
             SqlDataReader reader = data.GetData(sql, id);
             Content con = new Content();
 
@@ -54,10 +54,22 @@ namespace DigitalDiary.Models
             return con;
         }
 
-        //public int Update(Content con)
-        //{
-        //    string sql = "Update DiaryUser set Uname='" + us.Uname + "', Upassword='" + us.Upassword + "' where Uid=" + us.Uid;
-        //    return data.ExecuteQuery(sql);
-        //}
+        public int Update(Content con)
+        {
+            string sql = "Update DiaryContents set Nname='" + con.Nname + "', Ntext='" + con.Ntext + "',Nimage='" + con.Nimage + "',Npriority=" + con.Npriority + ",Ndate='" + con.Ndate + "' where Nid=" + con.Nid;
+            return data.ExecuteQuery(sql);
+        }
+
+        public int Insert(Content con)
+        {
+            string sql = "INSERT INTO DiaryContents(Uid,Nname,Ntext,Nimage,Npriority,Ndate) VALUES('" + con.Uid + "','" + con.Nname + "','" + con.Ntext + "','" + con.Nimage + "'," + con.Npriority + ",'" + con.Ndate + "')";
+            return data.ExecuteQuery(sql);
+        }
+
+        public int Remove(int id)
+        {
+            string sql = "DELETE FROM DiaryContents WHERE Nid=" + id;
+            return data.ExecuteQuery(sql);
+        }
     }
 }

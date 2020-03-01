@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Home - DigitalDiary</title>
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Added New Note", "Create") &nbsp &nbsp &nbsp @Html.ActionLink("Logout", "logout")
     </p>
     <table class="table">
         <tr>
@@ -65,9 +65,9 @@
                 @Html.DisplayFor(modelItem => item.Npriority)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Nid  }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Nid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Nid })
             </td>
         </tr>
     }

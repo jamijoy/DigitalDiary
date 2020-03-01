@@ -11,13 +11,25 @@
     <title>DigitalDiary - Login</title>
 </head>
 <body>
+    <br/><hr>
+    <h1> DigitalDiary </h1>
+    <p style="background-color:red;"> @ViewBag.msg </p>
+    <hr><br/>
     <div>
-        <h1>Login / Register Page</h1>
-        <form method="post">
+        <h1> Login Page</h1>
+        <form action="Login/validate" method="post">
             <input type="text" placeholder=" Enter Username Here" name="Uname"><br/><br/>
             <input type="password" placeholder=" Enter Password Here" name="Upassword"><br /><br />
             <input type="submit" value="Login" name="login"><br /><br />
             </form>
-</div>
+    </div>
+    <div>
+        <h1>Register Page</h1>
+        <form action="Login/register" method="post">
+            Username:<br/><input type="text" name="RegName"><br /><br />
+            Password:<br/><input type="password" name="RegPassword"><br /><br />
+            <input type="submit" value="Register Now" name="reg"><br /><br />
+        </form>
+    </div>
 </body>
 </html>

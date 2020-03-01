@@ -1,4 +1,4 @@
-﻿@model DigitalDiary.Models.user
+﻿@model DigitalDiary.Models.Content
 
 @{
     Layout = null;
@@ -12,26 +12,71 @@
     <title>Details</title>
 </head>
 <body>
-    <fieldset>
-        <legend>user</legend>
+    <div>
+        <h4>Content</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nid)
+            </dt>
     
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Name)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Name)
-        </div>
+            <dd>
+                @Html.DisplayFor(model => model.Nid)
+            </dd>
     
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Password)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Password)
-        </div>
-    </fieldset>
+            <dt>
+                @Html.DisplayNameFor(model => model.Uid)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Uid)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nname)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nname)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Ntext)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ntext)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nimage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nimage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Ndate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ndate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Npriority)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Npriority)
+            </dd>
+    
+        </dl>
+    </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to Home", "Index", new { id=Model.Uid })
     </p>
 </body>
 </html>

@@ -72,5 +72,11 @@ namespace DigitalDiary.Models
             string sql = "Update DiaryUser set Uname='"+us.Uname+"', Upassword='"+us.Upassword+"' where Uid="+us.Uid;
             return data.ExecuteQuery(sql);
         }
+
+        public int Insert(string name, string password)
+        {
+            string sql = "insert into DiaryUsers values("+null+",'"+name+"','"+password+"')";
+            return data.ExecuteQuery(sql);
+        }
     }
 }
