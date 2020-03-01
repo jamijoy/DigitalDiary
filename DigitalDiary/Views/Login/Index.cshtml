@@ -17,7 +17,7 @@
     <hr><br/>
     <div>
         <h1> Login Page</h1>
-        <form action="Login/validate" method="post">
+        <form action="@Url.Action("validate", "Login")" method="post">
             <input type="text" placeholder=" Enter Username Here" name="Uname"><br/><br/>
             <input type="password" placeholder=" Enter Password Here" name="Upassword"><br /><br />
             <input type="submit" value="Login" name="login"><br /><br />
@@ -25,7 +25,7 @@
     </div>
     <div>
         <h1>Register Page</h1>
-        <form action="Login/register" method="post">
+        <form action="@Url.Action("register", "Login")" method="post">
             Username:<br/><input type="text" name="RegName"><br /><br />
             Password:<br/><input type="password" name="RegPassword"><br /><br />
             <input type="submit" value="Register Now" name="reg"><br /><br />

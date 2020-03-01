@@ -23,17 +23,7 @@ namespace DigitalDiary.Models
         {
             using (var cmd = new SqlCommand(sql, conn))
             {
-                return (int)cmd.ExecuteScalar(); // get the value of the count
-                //this.comm = new SqlCommand(sql,conn);
-                //int counting = (int)comm.ExecuteScalar();
-                //if (counting > 0)
-                //{
-                //    return 1;
-                //}
-                //else
-                //{
-                //    return 0;
-                //}
+                return (int)cmd.ExecuteScalar();
             }
         }
         public SqlDataReader GetData(string sql)

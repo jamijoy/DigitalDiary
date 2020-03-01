@@ -1,6 +1,7 @@
 ﻿using DigitalDiary.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,8 +15,15 @@ namespace DigitalDiary.Controllers
         // GET: Home
         public ActionResult Index(int id)
         {
-            this.id = id;
-            return View(noteRepo.GetAll(id));
+            if (Session["uname"] != null && Session["uid"] != null)
+            {
+                this.id = id;
+                return View(noteRepo.GetAll(id));
+            }
+            else
+            {
+                return RedirectToAction("logout");
+            }
         }
 
         public ActionResult Details(int id)
@@ -45,7 +53,7 @@ namespace DigitalDiary.Controllers
         public ActionResult ConfirmDelete(int id)
         {
             noteRepo.Remove(id);
-            return RedirectToAction("Index", new { id = this.id });
+            return RedirectToAction("Index", new { id = Session["uid"] });
         }
 
         [HttpGet]
@@ -57,14 +65,22 @@ namespace DigitalDiary.Controllers
         [HttpPost]
         public ActionResult Create(Content con)
         {
+            int nextNo = noteRepo.GetLastNoteNumber() + 1;
+            string ext = Path.GetExtension(con.imageFile.FileName);
+            string fileName = nextNo.ToString() + ext;
+            con.Nimage = "~/Image/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/Image/"),fileName);
+            con.imageFile.SaveAs(fileName);
+
+            //con.Nimage = "Hii";
             noteRepo.Insert(con);
-            return RedirectToAction("Index", new { id = this.id });
+            return RedirectToAction("Index", new { id = con.Uid }); 
         }
 
         [HttpGet, ActionName("logout")]
         public ActionResult back()
         {
-            Session["username"] = null;
+            Session["uname"] = null;
             Session["uid"] = null;
             return RedirectToAction("Index","Login");
         }

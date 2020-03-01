@@ -54,6 +54,18 @@ namespace DigitalDiary.Models
             return con;
         }
 
+        public int GetLastNoteNumber()
+        {
+            int nextID=0;
+            string sql = "select Nid from DiaryContents order by Nid asc";
+            SqlDataReader reader = data.GetData(sql);
+            while (reader.Read())
+            {
+                nextID = Convert.ToInt32(reader["Nid"]);
+            }
+            return nextID;
+        }
+
         public int Update(Content con)
         {
             string sql = "Update DiaryContents set Nname='" + con.Nname + "', Ntext='" + con.Ntext + "',Nimage='" + con.Nimage + "',Npriority=" + con.Npriority + ",Ndate='" + con.Ndate + "' where Nid=" + con.Nid;
@@ -62,8 +74,9 @@ namespace DigitalDiary.Models
 
         public int Insert(Content con)
         {
+            DataAccess dat = new DataAccess();
             string sql = "INSERT INTO DiaryContents(Uid,Nname,Ntext,Nimage,Npriority,Ndate) VALUES('" + con.Uid + "','" + con.Nname + "','" + con.Ntext + "','" + con.Nimage + "'," + con.Npriority + ",'" + con.Ndate + "')";
-            return data.ExecuteQuery(sql);
+            return dat.ExecuteQuery(sql);
         }
 
         public int Remove(int id)
