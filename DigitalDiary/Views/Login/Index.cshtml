@@ -9,13 +9,22 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>DigitalDiary - Login</title>
+    <style>
+        .divStyle {
+            width:300px;
+            background-color:transparent;
+            border:1px solid black;
+            border-radius:20px;
+            padding:20px;
+        }
+    </style>
 </head>
 <body>
     <br/><hr>
     <h1> DigitalDiary </h1>
-    <p style="background-color:red;"> @ViewBag.msg </p>
+    <p style="background-color:red;"> @ViewData["msg"] @ViewBag.msg @TempData["mgs"] </p>
     <hr><br/>
-    <div>
+    <div class="divStyle" style="float:left;margin-left:250px;">
         <h1> Login Page</h1>
         <form action="@Url.Action("validate", "Login")" method="post">
             <input type="text" placeholder=" Enter Username Here" name="Uname"><br/><br/>
@@ -23,11 +32,11 @@
             <input type="submit" value="Login" name="login"><br /><br />
             </form>
     </div>
-    <div>
+    <div class="divStyle" style="float:right;margin-right:250px;">
         <h1>Register Page</h1>
         <form action="@Url.Action("register", "Login")" method="post">
-            Username:<br/><input type="text" name="RegName"><br /><br />
-            Password:<br/><input type="password" name="RegPassword"><br /><br />
+            Username:<br /><input type="text" name="RegName"><br /><br />
+            Password:<br /><input type="password" name="RegPassword"><br /><br />
             <input type="submit" value="Register Now" name="reg"><br /><br />
         </form>
     </div>

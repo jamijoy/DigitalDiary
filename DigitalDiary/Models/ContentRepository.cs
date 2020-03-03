@@ -66,6 +66,18 @@ namespace DigitalDiary.Models
             return nextID;
         }
 
+        public string GetImageLink(int noteId)
+        {
+            string link="";
+            string sql = "select Nimage from DiaryContents where Nid="+noteId;
+            SqlDataReader reader = data.GetData(sql);
+            while (reader.Read())
+            {
+                link = reader["Nimage"].ToString();
+            }
+            return link;
+        }
+
         public int Update(Content con)
         {
             string sql = "Update DiaryContents set Nname='" + con.Nname + "', Ntext='" + con.Ntext + "',Nimage='" + con.Nimage + "',Npriority=" + con.Npriority + ",Ndate='" + con.Ndate + "' where Nid=" + con.Nid;

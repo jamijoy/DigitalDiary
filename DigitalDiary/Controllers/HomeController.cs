@@ -12,6 +12,7 @@ namespace DigitalDiary.Controllers
     {
         public int id;
         ContentRepository noteRepo = new ContentRepository();
+        UserRepository userRepo = new UserRepository();
         // GET: Home
         public ActionResult Index(int id)
         {
@@ -34,13 +35,51 @@ namespace DigitalDiary.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            Session["newNoteId"] = id;
             return View(noteRepo.Get(id));
         }
         [HttpPost]
         public ActionResult Edit(Content con)
         {
-            noteRepo.Update(con);
-            return RedirectToAction("Index", new { id=this.id });
+            //return con.Nid.ToString()+">>"+con.Uid.ToString() + ">>" + con.Nname + ">>" + con.Ntext + ">>" + con.Ndate + ">>" + con.Npriority.ToString() + ">>" + con.Nimage;
+
+            con.Nid = Convert.ToInt32(Session["newNoteId"]);
+            con.Uid = Convert.ToInt32(Session["uid"]);
+            con.Ndate = DateTime.Now.ToString();
+
+            try
+            {
+                string ext = Path.GetExtension(con.imageFile.FileName);
+                string fileName = Session["newNoteId"].ToString() + ext;
+                con.Nimage = "~/Image/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                con.imageFile.SaveAs(fileName);
+
+                noteRepo.Update(con);
+                return RedirectToAction("Index", new { id = con.Uid });
+                //return con.Nimage.ToString();
+            }
+            catch (Exception ex)
+            {
+                //con.Nimage = "~/Image/" + "DigitalDiaryDefault.jpg";
+                con.Nimage = noteRepo.GetImageLink(Convert.ToInt32(Session["newNoteId"]));
+                noteRepo.Insert(con);
+                return RedirectToAction("Index", new { id = con.Uid });
+                //return con.Nimage.ToString();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditProfile(int id)
+        {
+            return View(userRepo.Get(id));
+        }
+        [HttpPost]
+        public ActionResult EditProfile(User us)
+        {
+            us.Uid = Convert.ToInt32(Session["uid"]);
+            userRepo.Update(us);
+            return RedirectToAction("Index", new { id = this.id });
         }
 
         [HttpGet]
@@ -65,16 +104,29 @@ namespace DigitalDiary.Controllers
         [HttpPost]
         public ActionResult Create(Content con)
         {
-            int nextNo = noteRepo.GetLastNoteNumber() + 1;
-            string ext = Path.GetExtension(con.imageFile.FileName);
-            string fileName = nextNo.ToString() + ext;
-            con.Nimage = "~/Image/" + fileName;
-            fileName = Path.Combine(Server.MapPath("~/Image/"),fileName);
-            con.imageFile.SaveAs(fileName);
+            con.Ndate = DateTime.Now.ToString();
+            con.Uid = Convert.ToInt32(Session["uid"]);
 
-            //con.Nimage = "Hii";
-            noteRepo.Insert(con);
-            return RedirectToAction("Index", new { id = con.Uid }); 
+            try {
+                int nextNo = noteRepo.GetLastNoteNumber() + 1;
+
+                string ext = Path.GetExtension(con.imageFile.FileName);
+                string fileName = nextNo.ToString() + ext;
+                con.Nimage = "~/Image/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                con.imageFile.SaveAs(fileName);
+
+
+                noteRepo.Insert(con);
+                return RedirectToAction("Index", new { id = con.Uid });
+            }
+            catch(Exception ex)
+            {
+                con.Nimage = "~/Image/" + "DigitalDiaryDefault.jpg";
+                
+                noteRepo.Insert(con);
+                return RedirectToAction("Index", new { id = con.Uid });
+            }
         }
 
         [HttpGet, ActionName("logout")]
@@ -82,6 +134,7 @@ namespace DigitalDiary.Controllers
         {
             Session["uname"] = null;
             Session["uid"] = null;
+            Session["newNoteId"] = null;
             return RedirectToAction("Index","Login");
         }
     }

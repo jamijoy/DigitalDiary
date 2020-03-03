@@ -10,68 +10,55 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home - DigitalDiary</title>
+    <style>
+        a {
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body>
+    <br/>
+    <h1>Digital Diary </h1>
     <p>
-        @Html.ActionLink("Added New Note", "Create") &nbsp &nbsp &nbsp @Html.ActionLink("Logout", "logout")  &nbsp &nbsp &nbsp @Session["uname"]  &nbsp &nbsp &nbsp @Session["uid"]
+        @Html.ActionLink("Add New Note", "Create") &nbsp &nbsp &nbsp @Html.ActionLink("Update Account Information", "EditProfile", new { id=Session["uid"] }) &nbsp &nbsp &nbsp @Html.ActionLink("Logout", "logout")  &nbsp &nbsp &nbsp User Logged In : <b>@Session["uname"]</b>
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ntext)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nimage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ndate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Npriority)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ntext)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nimage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ndate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Npriority)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Nid  }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Nid }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Nid })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <br/>
+    <hr>
+    <br/>
+    <h3>Notes List:</h3>
+    <table class="table" style="margin-left:50px;">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <h5>
+                    <td>
+                        <b>@Html.DisplayFor(modelItem => item.Nname)</b> &nbsp &nbsp &nbsp Last Modified : <span style="color:dodgerblue;">@Html.DisplayFor(modelItem => item.Ndate)</span>
+                    </td>
+                </h5>
+            </tr>
+            <tr>
+                <h5>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ntext)
+                    </td>
+                </h5>
+            </tr>
+            <tr>
+                    <td>
+                        Priority Level : @Html.DisplayFor(modelItem => item.Npriority) &nbsp |
+                        @Html.ActionLink("Edit this note", "Edit", new { id = item.Nid }) |
+                        @Html.ActionLink("Show Note", "Details", new { id = item.Nid }) |
+                        @Html.ActionLink("Delete Note", "Delete", new { id = item.Nid })
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp
+                </td>
+            </tr>
+                }
+
+</table>
 </body>
 </html>

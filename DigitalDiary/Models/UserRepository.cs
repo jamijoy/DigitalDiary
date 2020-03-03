@@ -33,7 +33,7 @@ namespace DigitalDiary.Models
 
         public User Get(int id)
         {
-            string sql = "select * form DiaryUsers where Uid=@Uid";
+            string sql = "select * from DiaryUsers where Uid=@Uid";
             SqlDataReader reader = data.GetData(sql,id);
             User u = new User();
 
@@ -75,7 +75,7 @@ namespace DigitalDiary.Models
 
         public int Insert(string name, string password)
         {
-            string sql = "insert into DiaryUsers values("+null+",'"+name+"','"+password+"')";
+            string sql = "insert into DiaryUsers (Uname,Upassword) values('"+name+"','"+password+"')";
             return data.ExecuteQuery(sql);
         }
     }

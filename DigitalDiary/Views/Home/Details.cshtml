@@ -16,67 +16,75 @@
         <h4>Content</h4>
         <hr />
         <dl class="dl-horizontal">
+            @*
             <dt>
                 @Html.DisplayNameFor(model => model.Nid)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Nid)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Uid)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Uid)
             </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Nname)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Nname)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Ntext)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Ntext)
-            </dd>
-    
-            <dt>
-                <h3>Uploaded Picture</h3>
-</dt>
-    
-            <dd>
-                <img src="@Url.Content(Model.Nimage)" width="250px" height="250px">
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Ndate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Ndate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Npriority)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Npriority)
-            </dd>
-    
+            *@
+            <center>
+            <table>
+                <tr>
+                    <td>
+                        <dt>
+                            <h3>Uploaded Picture</h3>
+                        </dt>
+
+                        <dd>
+                            <img src="@Url.Content(Model.Nimage)" width="250px" height="250px">
+                        </dd>
+                    </td>
+                    <td>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Nname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ndate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Ndate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ntext)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Ntext)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Npriority)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Npriority)
+                        </dd>
+            <p>
+                @Html.ActionLink("Edit This Note", "Edit", new { id = Model.Nid }) |
+                @Html.ActionLink("Back to Home", "Index", new { id = Model.Uid })
+            </p>
+                    </td>
+                </tr>
+            </table>
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to Home", "Index", new { id=Model.Uid })
-    </p>
+    
+    </center>
 </body>
 </html>

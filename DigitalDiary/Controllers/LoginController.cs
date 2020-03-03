@@ -30,7 +30,9 @@ namespace DigitalDiary.Controllers
             }
             else
             {
+                ViewData["msg"] = "Wrong Credential";
                 ViewBag.msg = "Wrong Credential";
+                TempData["mgs"] = "Wrong Credential";
                 return RedirectToAction("Index");
             }
 
@@ -39,6 +41,7 @@ namespace DigitalDiary.Controllers
         public ActionResult insertData(FormCollection fc)
         {
             userRepo.Insert(fc["RegName"].ToString(), fc["RegPassword"].ToString());
+            TempData["mgs"] = "Registered Successfully";
             return RedirectToAction("Index");
         }
     }

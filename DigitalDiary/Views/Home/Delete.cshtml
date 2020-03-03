@@ -12,11 +12,14 @@
     <title>Delete</title>
 </head>
 <body>
+    
     <h3>Are you sure you want to delete this?</h3>
     <div>
         <h4>Content</h4>
         <hr />
         <dl class="dl-horizontal">
+
+            @*
             <dt>
                 @Html.DisplayNameFor(model => model.Nid)
             </dt>
@@ -32,7 +35,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Uid)
             </dd>
-    
+            *@
             <dt>
                 @Html.DisplayNameFor(model => model.Nname)
             </dt>
@@ -54,7 +57,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Nimage)
+                <img src="@Url.Content(Model.Nimage)" width="250px" height="250px">
             </dd>
     
             <dt>
@@ -64,7 +67,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Ndate)
             </dd>
-    
+            @*
             <dt>
                 @Html.DisplayNameFor(model => model.Npriority)
             </dt>
@@ -72,17 +75,18 @@
             <dd>
                 @Html.DisplayFor(model => model.Npriority)
             </dd>
-    
+            *@
         </dl>
     
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
     
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index",new { id=Model.Uid })
+                <input type="submit" value="Delete Note" class="btn btn-default" /> |
+                @Html.ActionLink("Back to Home", "Index",new { id=Model.Uid })
             </div>
         }
     </div>
+        
 </body>
 </html>
